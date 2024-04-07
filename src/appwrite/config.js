@@ -12,7 +12,7 @@ export class Service {
 		this.databases = new Databases(this.client);
 		this.bucket = new Storage(this.client);
 	}
-    
+
 	async createPost({ title, slug, content, featuredImage, status, userId }) {
 		try {
 			return await this.databases.createDocument(
@@ -86,7 +86,6 @@ export class Service {
 		}
 	}
 
-
 	///file Upload service
 
 	async uploadFile(file) {
@@ -119,4 +118,4 @@ export class Service {
 	}
 }
 const service = new Service();
-export default Service;
+export default service;
