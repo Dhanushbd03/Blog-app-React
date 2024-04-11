@@ -26,21 +26,21 @@ const Signup = () => {
 		}
 	};
 	return (
-		<div className="">
-			<div className="">
-				<div className="">
+		<div className="flex justify-center text-gr">
+			<div className="h-full p-10 text-center sm:w-3/12  border-2 border-gr flex flex-col ">
+				<div className="flex justify-center pb-5">
 					<span className="">
 						<Logo />
 					</span>
 				</div>
-				<h2 className="">Signup for an account</h2>
-				<p className="">
-					Already have an account?
-					<Link to="/login" className="">
+				<h2 className="font-bold text-2xl pb-5">Signup for an account</h2>
+				<p className="order-1">
+					Already have an account?&nbsp;
+					<Link to="/login" className="text-wht">
 						Login
 					</Link>
 				</p>
-				{error && <p className="">{error}</p>}
+				{error && <p className="text-rd">{error}</p>}
 				<form onSubmit={handleSubmit(signup)}>
 					<div className="">
 						<Input
@@ -65,14 +65,14 @@ const Signup = () => {
 							})}
 						/>
 						<Input
-							label="password"
+							label="Password"
 							type="password"
-							placeholder="password"
+							placeholder="[a-z][A-Z][0-9][!,@,#,$,%,^,&,*]"
 							{...register("password", {
 								required: true,
 							})}
 						/>
-						<Button type="submit" children="Signup"  />{" "}
+						<Button type="submit" children="Signup"  className="text-bl font-bold bg-gr" />{" "}
 					</div>
 				</form>
 			</div>

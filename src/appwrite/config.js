@@ -61,7 +61,7 @@ export class Service {
 			return false;
 		}
 	}
-	async getPost({ slug }) {
+	async getPost( slug ) {
 		try {
 			return await this.databases.getDocument(
 				conf.appWriteDatabaseId,
@@ -111,6 +111,7 @@ export class Service {
 	}
 	getFilePreview(fileId) {
 		try {
+			
 			return this.bucket.getFilePreview(conf.appWriteBucketId, fileId);
 		} catch (error) {
 			console.log("Appwrite service :: getFilePreview :: error ", error);
