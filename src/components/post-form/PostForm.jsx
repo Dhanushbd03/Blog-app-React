@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index.js";
 import service from "../../appwrite/config.js";
@@ -9,14 +9,19 @@ const PostForm = ({ post }) => {
 		useForm({
 			defaultValues: {
 				title: post?.title || "",
-				slug: post?.slug || "",
+				slug: post?.$id || "",
 				content: post?.content || "",
 				status: post?.status || true,
 			},
 		});
+
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.auth.userData);
-	console.log(userData.$id);
+console.log(userData);
+	const [message, setMessage] = useState({
+		text: "",
+		error: false,
+	});
 
 	const submit = async (data) => {
 		if (post) {
@@ -45,18 +50,33 @@ const PostForm = ({ post }) => {
 					userId: userData.$id,
 				});
 				if (dbPost) {
+					setMessage({ text: "Post created successfully", error: false });
 					navigate("/post/${dbPost.$id}");
+				} else {
+					setMessage({
+						text: "there was a error in creating a post",
+						error: true,
+					});
 				}
 			}
 		}
 	};
 	const slugTransform = useCallback((value) => {
 		if (value && typeof value == "string") {
-			return value
-				.trim() // "Hello World 123!@#"
-				.toLowerCase() // "hello world 123!@#"
-				.replace(/[^a-zA-Z\d\s]/g, "") // "hello world 123"
-				.replace(/\s+/g, "-"); // "hello-world-123"
+			return String(
+				value
+					.trim() // "Hello World 123!@#"
+					.toLowerCase() // "hello world 123!@#"
+					.replace(/[^a-zA-Z\d\s]/g, "") // "hello world 123"
+					.replace(/\s+/g, "-")
+					.slice(0, 5) +
+					value
+						.trim() // "Hello World 123!@#"
+						.toLowerCase() // "hello world 123!@#"
+						.replace(/[^a-zA-Z\d\s]/g, "") // "hello world 123"
+						.replace(/\s+/g, "-")
+						.slice(-5, -1)
+			); // "hello-world-123"
 		}
 
 		return "";
@@ -89,14 +109,22 @@ const PostForm = ({ post }) => {
 							shouldValidate: true,
 						});
 					}}
+					disabled={true}
 				/>
-
+			</div>
+			<div className="flex gap-10">
 				<Input
 					label="Featured image"
 					type="file"
-					className=""
+					className="w-full"
 					accept="image/png ,image/jpg ,image/jpeg ,image/gif"
 					{...register("image", { required: !post })}
+				/>
+				<Select
+					options={["active", "inactive"]}
+					label="Status"
+					className="w-full"
+					{...register("status", { required: true })}
 				/>
 			</div>
 
@@ -109,21 +137,17 @@ const PostForm = ({ post }) => {
 					/>
 				</div>
 			)}
-			<Select
-				options={["active", "inactive"]}
-				label="Status"
-				className="w-full"
-				{...register("status", { required: true })}
-			/>
+
 			<RTE
 				label="Content"
 				name="content"
 				control={control}
 				defaultValue={getValues("content")}
 			/>
-			<Button type="submit" bgColor={post ? "bg-green-500" : undefined}>
+			<Button type="submit" className="bg-gr">
 				{post ? "Update" : "Submit"}
 			</Button>
+			<p className={message.error ? `text-rd` : `text-wht`}>{message.text}</p>
 		</form>
 	);
 };

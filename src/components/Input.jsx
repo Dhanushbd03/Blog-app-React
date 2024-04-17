@@ -13,11 +13,11 @@ const Input = React.forwardRef(
 				)}
 				<input
 					type={type}
-					className="placeholder:bg-bl placeholder:opacity-25 bg-bl border-2 border-gr mb-3 p-3"
+					className={`placeholder:bg-bl placeholder:opacity-25 bg-bl border-2 border-gr mb-3 p-3 ${className}`}
 					ref={ref}
 					{...props}
 					id={id}
-					required
+					disabled={props.disabled}
 				/>
 			</div>
 		);

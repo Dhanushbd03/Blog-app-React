@@ -26,8 +26,8 @@ const App = () => {
 			});
 	}, []);
 	return !loading ? (
-		<div className="min-h-screen flex flex-wrap content-between bg-bl">
-			<div className="w-full flex flex-col">
+		<div className="min-h-screen flex flex-wrap content-between bg-bl w-screen">
+			<div className="w-full flex flex-col min-w-[355px] min-h-[270px] metal-regular">
 				<Header />
 				<main>
 					<Outlet />

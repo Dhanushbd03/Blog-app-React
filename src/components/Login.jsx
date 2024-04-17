@@ -29,8 +29,8 @@ const Login = () => {
 	};
 
 	return (
-		<div className=" flex justify-center text-gr">
-			<div className="h-full  p-10 text-center sm:w-3/12  border-2 border-gr flex flex-col">
+		<div className=" flex justify-center text-gr w-full">
+			<div className="h-full  p-10 text-center w-full sm:w-1/4 border-2 border-gr flex flex-col">
 				<div className="flex justify-center pb-5">
 					<span className="">
 						<Logo />
@@ -67,7 +67,11 @@ const Login = () => {
 							required: true,
 						})}
 					/>
-					<Button type="submit" children="Sign in" className="bg-gr active:bg-wht text-bl font-bold" />
+					<Button
+						type="submit"
+						children="Sign in"
+						className="bg-gr active:bg-wht text-bl font-bold"
+					/>
 				</form>
 			</div>
 		</div>

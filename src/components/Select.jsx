@@ -15,7 +15,7 @@ const Select = ({ options, label, className = "", ...props }, ref) => {
 				id={id}
 				{...props}
 				ref={ref}
-				className="rounded-sm bg-bl border-2 border-gr mb-3 p-3"
+				className="rounded-sm bg-bl border-2 border-gr mb-3 p-2"
 			>
 				{options?.map((option) => {
 					return (

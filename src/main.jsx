@@ -15,6 +15,7 @@ import {
 	Signup,
 	Login,
 } from "./pages/pages.js";
+import Profile from "./pages/Profile.jsx";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -70,6 +71,15 @@ const router = createBrowserRouter([
 			{
 				path: "/post/:slug",
 				element: <Post />,
+			},
+			{
+				path: "/profile",
+				element: (
+					<AuthLayout authentication>
+						{" "}
+						<Profile />
+					</AuthLayout>
+				),
 			},
 		],
 	},

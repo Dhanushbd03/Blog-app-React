@@ -27,7 +27,7 @@ const Signup = () => {
 	};
 	return (
 		<div className="flex justify-center text-gr">
-			<div className="h-full p-10 text-center sm:w-3/12  border-2 border-gr flex flex-col ">
+			<div className="h-full p-10 text-center w-full sm:w-1/4  border-2 border-gr flex flex-col ">
 				<div className="flex justify-center pb-5">
 					<span className="">
 						<Logo />
