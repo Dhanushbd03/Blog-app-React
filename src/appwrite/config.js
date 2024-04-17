@@ -12,7 +12,67 @@ export class Service {
 		this.databases = new Databases(this.client);
 		this.bucket = new Storage(this.client);
 	}
+	// Profile Config //
+	async createProfilePic({ userId, Profilepic }) {
+		try {
+			return await this.databases.createDocument(
+				conf.appWriteDatabaseId,
+				conf.appWriteUserProfileCollectionId,
+				userId,
+				{
+					Profilepic,
+				}
+			);
+		} catch (error) {
+			console.log("Appwrite service :: create profile pic :: error", error);
+		}
+	}
+	async getProfilePic(userId) {
+		try {
+			return await this.databases.getDocument(
+				conf.appWriteDatabaseId,
+				conf.appWriteUserProfileCollectionId,
+				userId
+			);
+		} catch (error) {
+			console.log("Appwrite service :: getProfilePic :: error", error);
+			return false;
+		}
+	}
+	getProfilePreview(fileId) {
+		try {
+			const result = this.bucket.getFilePreview(
+				conf.appWriteUserBucketId,
+				fileId
+			);
+			return result;
+		} catch (error) {
+			console.log("Appwrite service :: getProfilePreview :: error ", error);
+		}
+	}
+	async deleteProfilepic(fileId) {
+		try {
+			await this.bucket.deleteFile(conf.appWriteUserBucketId, fileId);
+			return true;
+		} catch (error) {
+			console.log("Appwrite service :: deleteProfile pic  :: error ", error);
+			return false;
+		}
+	}
+	async uploadProfile(file) {
+		try {
+			return await this.bucket.createFile(
+				conf.appWriteUserBucketId,
+				ID.unique(),
+				file
+			);
+		} catch (error) {
+			console.log("Appwrite service :: uploadProfile :: error ", error);
+			return false;
+		}
+	}
 
+	//post config to add to database
 	async createPost({ title, slug, content, featuredImage, status, userId }) {
 		try {
 			return await this.databases.createDocument(
@@ -87,18 +147,7 @@ export class Service {
 	}
 
 	///file Upload service
-	async uploadProfile(file) {
-		try {
-			return await this.bucket.createFile(
-				conf.appWriteBucketId,
-				ID.unique(),
-				file
-			);
-		} catch (error) {
-			console.log("Appwrite service :: uploadProfile :: error ", error);
-			return false;
-		}
-	}
+
 	async uploadFile(file) {
 		try {
 			return await this.bucket.createFile(
@@ -120,6 +169,7 @@ export class Service {
 			return false;
 		}
 	}
+
 	getFilePreview(fileId) {
 		try {
 			const result = this.bucket.getFilePreview(conf.appWriteBucketId, fileId);
@@ -129,5 +179,6 @@ export class Service {
 		}
 	}
 }
+
 const service = new Service();
 export default service;

@@ -10,7 +10,7 @@ const Post = () => {
 	const { slug } = useParams();
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.auth.userData);
-	
+
 	const isAuthor = post && userData ? post.userId === userData.$id : false;
 	useEffect(() => {
 		if (slug) {
@@ -39,7 +39,7 @@ const Post = () => {
 			<Container className="bg-gr m-5 rounded-xl p-5 flex flex-col mx-auto ">
 				<div className="flex justify-between ">
 					<h1 className="py-2 px-4 text-4xl">{post.title}</h1>
-					{/* <p>{userData.name}</p> */}
+
 					{isAuthor && (
 						<div className="">
 							<Link to={`/edit-post/${post.$id}`}>

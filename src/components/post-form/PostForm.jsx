@@ -17,7 +17,7 @@ const PostForm = ({ post }) => {
 
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.auth.userData);
-console.log(userData);
+
 	const [message, setMessage] = useState({
 		text: "",
 		error: false,
@@ -28,6 +28,7 @@ console.log(userData);
 			const file = data.image[0]
 				? await service.uploadFile(data.image[0])
 				: null;
+
 			if (file) {
 				service.deleteFile(post.featuredImage);
 			}
@@ -68,13 +69,13 @@ console.log(userData);
 					.trim() // "Hello World 123!@#"
 					.toLowerCase() // "hello world 123!@#"
 					.replace(/[^a-zA-Z\d\s]/g, "") // "hello world 123"
-					.replace(/\s+/g, "-")
+					.replace(/\s+/g, "0")
 					.slice(0, 5) +
 					value
 						.trim() // "Hello World 123!@#"
 						.toLowerCase() // "hello world 123!@#"
 						.replace(/[^a-zA-Z\d\s]/g, "") // "hello world 123"
-						.replace(/\s+/g, "-")
+						.replace(/\s+/g, "0")
 						.slice(-5, -1)
 			); // "hello-world-123"
 		}
