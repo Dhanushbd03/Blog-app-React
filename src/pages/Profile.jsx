@@ -11,7 +11,7 @@ const Profile = () => {
 	const [image, addImage] = useState(false);
 	const [pic, setPic] = useState("");
 	const userId = userData?.$id;
-	const img = pic.Profilepic || "";
+	const img = pic?.Profilepic;
 
 	const submit = async (data) => {
 		const file = data.image[0]
@@ -40,9 +40,14 @@ const Profile = () => {
 
 	useEffect(() => {
 		if (userId) {
-			service.getProfilePic(userId).then((pic) => {
-				if (pic) setPic(pic);
-			});
+			service
+				.getProfilePic(userId)
+				.then((pic) => {
+					if (pic) setPic(pic);
+				})
+				.catch((error) => {
+					console.error("Error fetching profile picture:", error);
+				});
 		}
 	}, []);
 
@@ -58,7 +63,7 @@ const Profile = () => {
 							}}
 						>
 							<img
-								src={`${service.getProfilePreview(img)}`}
+								src={service.getProfilePreview(pic.Profilepic)}
 								alt="Add Your image"
 								className="w-40 h-40 rounded-full bg-bl mb-5 mx-auto text-gr "
 							/>
