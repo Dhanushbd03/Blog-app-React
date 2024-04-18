@@ -17,7 +17,7 @@ const Signup = () => {
 			if (userData) {
 				const userData = await authService.getCurrentUser();
 				if (userData) {
-					dispatch(login(userData));
+					dispatch(authLogin(userData));
 					navigate("/");
 				}
 			}
@@ -72,7 +72,11 @@ const Signup = () => {
 								required: true,
 							})}
 						/>
-						<Button type="submit" children="Signup"  className="text-bl font-bold bg-gr" />{" "}
+						<Button
+							type="submit"
+							children="Signup"
+							className="text-bl font-bold bg-gr"
+						/>{" "}
 					</div>
 				</form>
 			</div>
