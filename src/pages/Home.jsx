@@ -59,7 +59,7 @@ const Home = () => {
 				<div className="flex flex-wrap justify-center ">
 					{posts.map((post, index) => {
 						return (
-							index <= 10 && (
+							index <= 3 && (
 								<div key={post.$id} className="p-4">
 									<PostCard {...post} />
 								</div>

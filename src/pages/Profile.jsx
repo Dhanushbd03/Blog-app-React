@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import service from "../appwrite/config";
 
-const Profile = ({ userpic }) => {
+const Profile = () => {
 	const { register, handleSubmit } = useForm();
 	const userData = useSelector((state) => state.auth.userData);
 

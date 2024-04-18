@@ -30,7 +30,7 @@ const AllPosts = () => {
 			<Container className="mx-auto">
 				<div className=" mobile:w-full sm:flex flex-wrap ">
 					{posts.map((post) => (
-						<div key={post.$id} className="">
+						<div key={post.$id} className="mx-auto">
 							<PostCard {...post} />
 						</div>
 					))}
