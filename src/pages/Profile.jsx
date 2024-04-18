@@ -63,7 +63,7 @@ const Profile = () => {
 							}}
 						>
 							<img
-								//changed appwrite role to "any"
+								//changed appwrite role to "any and user"
 								src={service.getProfilePreview(pic.Profilepic)}
 								alt="Add Your image"
 								className="w-40 h-40 rounded-full bg-bl mb-5 mx-auto text-gr "
