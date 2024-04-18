@@ -49,7 +49,7 @@ const Profile = () => {
 					console.error("Error fetching profile picture:", error);
 				});
 		}
-	}, []);
+	}, [pic]);
 
 	return (
 		<div>

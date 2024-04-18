@@ -10,7 +10,7 @@ const AllPosts = () => {
 				setPosts(posts.documents);
 			}
 		});
-	}, [posts]);
+	}, [posts.documents]);
 
 	if (posts.length === 0) {
 		return (
